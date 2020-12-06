@@ -1,6 +1,7 @@
 package com.example.junitlesson;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,12 +15,12 @@ public class CalculatorController {
     CalculatorService calculatorService;
 
     @GetMapping("/multiply")
-    public int multiply(@RequestParam("x") int x, @RequestParam("y") int y) {
-        return calculatorService.multiply(x, y);
+    public ResponseEntity multiply(@RequestParam("x") int x, @RequestParam("y") int y) {
+        return ResponseEntity.ok(calculatorService.multiply(x, y));
     }
 
     @GetMapping("/divide")
-    public double divide(@RequestParam("dividend") int dividend, @RequestParam("divisor") int divisor) throws CalculatorException {
-        return calculatorService.divide(dividend, divisor);
+    public ResponseEntity<Double> divide(@RequestParam("dividend") int dividend, @RequestParam("divisor") int divisor) throws CalculatorException {
+        return ResponseEntity.ok(calculatorService.divide(dividend, divisor));
     }
 }
